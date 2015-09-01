@@ -1,17 +1,42 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>CintryxTodo</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
-
-<%= yield %>
-
-</body>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Cintryx | <%= @page_title || 'Todo Manager' %></title>
+    <meta name="author" content="Matt Santeler">
+    <%= stylesheet_link_tag('application') %>
+    <%= csrf_meta_tag %>
+    
+  </head>
+  <body>
+    <div id="header" class="container">
+    </div>
+    <div id="main" class="container">
+      <% if !notice.blank? %>
+      <div class="col-md-12 bg-warning" style="font: 30px">
+          <%= notice %>
+      </div>
+      <% end %>
+      <% if !alert.blank? %>
+      <div class="col-md-12 bg-danger" style="font: 30px">
+          <%= alert %>
+      </div>
+      <% end %>
+      <div id="content" class="row">
+        <div class="col-md-12">
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+    <div id="footer" class="container">
+      <div id="content" class="row">
+        <div class="col-md-12">
+          <p>&copy; Copyright footer stuff here ;)  <span style="float: right;"><%= link_to("Home", root_path) %></span></p>
+        </div>
+      </div>
+    </div>
+    <%= javascript_include_tag('application') %>
+  </body>
+  
 </html>
