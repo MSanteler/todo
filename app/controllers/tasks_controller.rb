@@ -23,7 +23,7 @@ class TasksController < ApplicationController
     if @task.save(task_params)
       redirect_to(root_path, :notice => 'Task was successfully created.')
     else
-      format.html { render :action => "edit" }
+      render :action => "edit"
     end
   end
 
@@ -51,7 +51,16 @@ class TasksController < ApplicationController
     if @task.update_attributes(task_params)
       redirect_to(root_path, :notice => 'Task was successfully updated.')
     else
-      format.html { render :action => "edit" }
+      render :action => "edit"
+    end
+  end
+
+  def destroy
+    @task = Task.find(params[:id])
+    @task.destroy
+    @tasks = current_user.tasks.root_tasks
+    respond_to do |format|
+      format.js
     end
   end
 

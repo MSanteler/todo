@@ -6,13 +6,16 @@
     </div>
   </div>
   <%= link_to edit_task_path(task, format: :js), remote: true, authenticity_token: true, class: "btn btn-primary btn-xs" do %>
-    <span class="glyphicon glyphicon-pencil"></span> Edit <%= task.title %>
+    <i class="fa fa-pencil"></i> Edit <%= task.title %>
+  <% end %>
+  <%= link_to task_path(task, format: :js), method: :delete, data: { confirm: 'Are you sure?' }, remote: true, authenticity_token: true, class: "btn btn-danger btn-xs" do %>
+    <i class="fa fa-ban"></i> Delete <%= task.title %>
   <% end %>
   <ul>
     <%= render task.subtasks %>
     <li>
       <%= link_to new_task_path(format: :js, parent: task.id), remote: true, authenticity_token: true, class: "btn btn-primary btn-xs", :data => { :parent => task.id } do %>
-        <span class="glyphicon glyphicon-plus"></span> Add Subtask
+        <i class="fa fa-plus"></i>  Add Subtask
       <% end %>
     </li>
   </ul>

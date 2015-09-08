@@ -5,11 +5,7 @@
   <div class="col-md-12">
     <ul id="primary_task_list">
       <%= render @tasks %>
-      <li>
-        <%= link_to new_task_path(format: :js), remote: true, authenticity_token: true, class: "btn btn-primary btn-xs" do %>
-          <span class="glyphicon glyphicon-plus"></span> Add Task
-        <% end %>
-      </li>
+      <%= render(:partial => 'tasks/new_task_button') %>
     </ul>
   </div>
 </div>
