@@ -1,0 +1,2 @@
+$('#primary_task_list').html('<%= escape_javascript(render(@tasks)) %>');
+$('#primary_task_list').append('<%= escape_javascript(render(:partial => 'new_task_button')) %>');
