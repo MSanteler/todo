@@ -14,6 +14,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Heroku
 gem 'rails_12factor', group: :production
+ruby "2.2.2"
 
 group :development, :test do
   gem "byebug"
