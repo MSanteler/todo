@@ -1,0 +1,4 @@
+<div id="new_parental" class="form-group">
+  <%= b.label(:task_id, "Parent Task ID (Leave blank for root task): ") %>
+  <%= b.select(:task_id, @all_tasks.reject { |t| t.id == @task.id }.collect {|t| [t.title, t.id]}, { include_blank: true } ) %>
+</div>

@@ -1,0 +1,7 @@
+<!-- New Task -->
+<%= form_for @task do |f| %>			
+	<%= render(:partial => 'form', :locals => {:f => f}) %>    
+	<div class="form-buttons">
+		<%= submit_tag("Create Task") %>
+	</div>   
+<% end %>

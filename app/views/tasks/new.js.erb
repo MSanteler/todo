@@ -1,0 +1,4 @@
+$('.modal-title').html('New Task');
+$('.modal-body').html('<%= escape_javascript(render('new_form')) %>');
+$('#task_parental_tasklet_attributes_task_id').val('<%= @parent_id_param %>');;
+$('#newTaskModal').modal('show');

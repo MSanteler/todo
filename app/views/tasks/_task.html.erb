@@ -1,0 +1,21 @@
+<li>
+  <h4 class="task_title"><%= task.title %></h4>
+  <div class="row">
+    <div class="col-md-12">
+      <%= task.description %>
+    </div>
+  </div>
+  <%= link_to edit_task_path(task, format: :js), remote: true, authenticity_token: true, class: "btn btn-primary btn-xs" do %>
+    <span class="glyphicon glyphicon-pencil"></span> Edit <%= task.title %>
+  <% end %>
+  <ul>
+    <%= render task.subtasks %>
+    <li>
+      <%= link_to new_task_path(format: :js, parent: task.id), remote: true, authenticity_token: true, class: "btn btn-primary btn-xs", :data => { :parent => task.id } do %>
+        <span class="glyphicon glyphicon-plus"></span> Add Subtask
+      <% end %>
+    </li>
+  </ul>
+</li>
+
+

@@ -1,0 +1,3 @@
+$('.modal-title').html('Edit <%= @task.title %>');
+$('.modal-body').html('<%= escape_javascript(render('edit_form')) %>');
+$('#newTaskModal').modal('show');
