@@ -13,14 +13,17 @@ class TasksController < ApplicationController
   def create
     @task = Task.new(task_params)
 
+    edited_params = task_params
     if task_params[:parental_tasklet_attributes][:task_id].present?
     	@new_parent = Task.find(task_params[:parental_tasklet_attributes][:task_id])
       @task.associate_with_parent(@new_parent)
     else
       @task.parental_tasklet = nil
     end
+    edited_params.delete(:parental_tasklet_attributes)
 
-    if @task.save(task_params)
+    @task.user_id = current_user.id
+    if @task.save!(edited_params)
       redirect_to(root_path, :notice => 'Task was successfully created.')
     else
       render :action => "edit"
@@ -29,7 +32,7 @@ class TasksController < ApplicationController
 
   def edit
     @task = Task.find(params[:id])
-    @all_tasks = current_user.all_tasks
+    @all_tasks = current_user.tasks
 
     respond_to do |format|
       format.js
@@ -41,14 +44,17 @@ class TasksController < ApplicationController
 
     @parental = @task.parental_tasklet
 
+    edited_params = task_params
     if task_params[:parental_tasklet_attributes][:task_id].present?
       @new_parent = Task.find(task_params[:parental_tasklet_attributes][:task_id])
       @task.associate_with_parent(@new_parent)
     else
       @task.parental_tasklet = nil
     end
+    edited_params.delete(:parental_tasklet_attributes)
 
-    if @task.update_attributes(task_params)
+    @task.user = current_user
+    if @task.update_attributes!(edited_params)
       redirect_to(root_path, :notice => 'Task was successfully updated.')
     else
       render :action => "edit"
@@ -68,7 +74,7 @@ class TasksController < ApplicationController
   
   # Strong Params
   def task_params
-    params.require(:task).permit(:title, :description, :parental_tasklet_attributes => [:id, :task_id, :_destroy]).merge(user_id: current_user.id)
+    params.require(:task).permit(:title, :description, :parental_tasklet_attributes => [:id, :task_id, :_destroy])
   end
 
 end

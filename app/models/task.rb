@@ -18,9 +18,10 @@ class Task < ActiveRecord::Base
 	validates :user_id, :presence => true
 
   def associate_with_parent(parent_task)
-  	if parental_tasklet
+    if parental_tasklet
   		if parental_tasklet.persisted?
   			parental_tasklet.destroy
+        parent_task.subtasks << self
 			elsif @parental.try(:task) == parent_task
 				parental_tasklet.save
 			end
